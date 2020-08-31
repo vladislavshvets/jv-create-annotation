@@ -8,7 +8,7 @@ import core.basesyntax.controller.ConsoleHandler;
 public class Main {
     public static void main(String[] args) {
         ConsoleHandler handler = new ConsoleHandler();
-        System.out.println("Введите value и risk! ");
+        System.out.println("Please, add value and risk! ");
         handler.handle();
     }
 
