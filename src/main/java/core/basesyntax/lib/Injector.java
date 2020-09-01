@@ -1,7 +1,9 @@
 package core.basesyntax.lib;
 
 import core.basesyntax.dao.BetDao;
+import core.basesyntax.dao.BetDaoImpl;
 import core.basesyntax.dao.CitizenDao;
+import core.basesyntax.dao.CitizenDaoImpl;
 import core.basesyntax.factory.Factory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -13,6 +15,8 @@ public class Injector {
             IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<?> constructor = clazz.getDeclaredConstructor();
         Object instance = constructor.newInstance();
+        Class<BetDaoImpl> betDaoImplClass = BetDaoImpl.class;
+        Class<CitizenDaoImpl> citizenDaoClass = CitizenDaoImpl.class;
 
         Field[] declaredFields = clazz.getDeclaredFields();
         for (Field field : declaredFields) {
