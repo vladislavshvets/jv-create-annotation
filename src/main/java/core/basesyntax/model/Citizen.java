@@ -27,8 +27,6 @@ public class Citizen {
 
     @Override
     public String toString() {
-        return "Citizen{"
-                + "name='" + name
-                + '\'' + ", age=" + age + '}';
+        return "Citizen{" + "name='" + name + '\'' + ", age=" + age + '}';
     }
 }
