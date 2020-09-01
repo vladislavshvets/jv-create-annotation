@@ -1,9 +1,7 @@
 package core.basesyntax.lib;
 
 import core.basesyntax.dao.BetDao;
-import core.basesyntax.dao.BetDaoImpl;
 import core.basesyntax.dao.CitizenDao;
-import core.basesyntax.dao.CitizenDaoImpl;
 import core.basesyntax.exceptions.IncorrectAnnotation;
 import core.basesyntax.factory.Factory;
 import java.lang.reflect.Constructor;
@@ -16,8 +14,8 @@ public class Injector {
             IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<?> constructor = clazz.getDeclaredConstructor();
         Object instance = constructor.newInstance();
-        Class<BetDaoImpl> betDaoImplClass = BetDaoImpl.class;
-        Class<CitizenDaoImpl> citizenDaoClass = CitizenDaoImpl.class;
+        Class<? extends BetDao> betDaoImplClass = Factory.getBetDao().getClass();
+        Class<? extends CitizenDao> citizenDaoClass = Factory.citizenDao().getClass();
         if (!betDaoImplClass.isAnnotationPresent(Dao.class)
                 || !citizenDaoClass.isAnnotationPresent(Dao.class)) {
             throw new IncorrectAnnotation("Incorrect annotation!");
