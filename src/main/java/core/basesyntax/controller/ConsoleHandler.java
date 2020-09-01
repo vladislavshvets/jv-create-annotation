@@ -10,11 +10,12 @@ import java.util.Scanner;
 public class ConsoleHandler {
     @Inject
     BetDao betDao;
+
     @Inject
     CitizenDao citizenDao;
 
     public void handleCitizen() {
-        System.out.println("Please, add name and age! ");
+        System.out.println("Please, add name(String) and age(number)! ");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String command = scanner.nextLine();
@@ -22,16 +23,16 @@ public class ConsoleHandler {
                 return;
             }
             Citizen citizen = null;
+            String[] betData = command.split(" ");
             try {
-                String[] betData = command.split(" ");
                 String name = (betData[0]);
                 int age = Integer.parseInt(betData[1]);
                 citizen = new Citizen(name, age);
-
+                citizenDao.add(citizen);
             } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-                System.out.println("Please, add to correct name and age!");
+                System.out.println("Please, add the correct name and age!");
             }
-            citizenDao.add(citizen);
+
             System.out.println(citizenDao == null ? null : (String.valueOf(citizen)).toString());
         }
     }
@@ -45,14 +46,14 @@ public class ConsoleHandler {
                 return;
             }
             Bet bet = null;
+            String[] betData = command.split(" ");
             try {
-                String[] betData = command.split(" ");
                 int value = Integer.parseInt(betData[0]);
                 double risk = Double.parseDouble(betData[1]);
                 bet = new Bet(value, risk);
 
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                System.out.println("Please, add to correct value and risk!");
+                System.out.println("Please, add the correct value and risk!");
             }
             betDao.add(bet);
             System.out.println(bet == null ? null : bet.toString());
