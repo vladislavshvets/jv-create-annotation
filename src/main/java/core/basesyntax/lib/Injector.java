@@ -2,7 +2,7 @@ package core.basesyntax.lib;
 
 import core.basesyntax.dao.BetDao;
 import core.basesyntax.dao.CitizenDao;
-import core.basesyntax.exceptions.IncorrectAnnotation;
+import core.basesyntax.exceptions.NotFoundDaoAnnotation;
 import core.basesyntax.factory.Factory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -15,10 +15,10 @@ public class Injector {
         Constructor<?> constructor = clazz.getDeclaredConstructor();
         Object instance = constructor.newInstance();
         Class<? extends BetDao> betDaoImplClass = Factory.getBetDao().getClass();
-        Class<? extends CitizenDao> citizenDaoClass = Factory.citizenDao().getClass();
+        Class<? extends CitizenDao> citizenDaoClass = Factory.getCitizenDao().getClass();
         if (!betDaoImplClass.isAnnotationPresent(Dao.class)
                 || !citizenDaoClass.isAnnotationPresent(Dao.class)) {
-            throw new IncorrectAnnotation("Incorrect annotation!");
+            throw new NotFoundDaoAnnotation("Incorrect annotation!");
         }
         Field[] declaredFields = clazz.getDeclaredFields();
         for (Field field : declaredFields) {
@@ -28,7 +28,7 @@ public class Injector {
                     field.set(instance, Factory.getBetDao());
                 }
                 if (field.getType().equals(CitizenDao.class)) {
-                    field.set(instance, Factory.citizenDao());
+                    field.set(instance, Factory.getCitizenDao());
                 }
             }
         }

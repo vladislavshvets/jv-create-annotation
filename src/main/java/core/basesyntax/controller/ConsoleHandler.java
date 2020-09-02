@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class ConsoleHandler {
     @Inject
-    BetDao betDao;
+    private BetDao betDao;
 
     @Inject
-    CitizenDao citizenDao;
+    private CitizenDao citizenDao;
 
     public void handleCitizen() {
         System.out.println("Please, add name and age! For example: James  65. ");

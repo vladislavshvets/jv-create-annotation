@@ -4,7 +4,6 @@ import core.basesyntax.dao.BetDao;
 import core.basesyntax.dao.BetDaoImpl;
 import core.basesyntax.dao.CitizenDao;
 import core.basesyntax.dao.CitizenDaoImpl;
-import core.basesyntax.lib.Dao;
 
 public class Factory {
     private static BetDao betDao;
@@ -17,8 +16,8 @@ public class Factory {
         return betDao;
     }
 
-    public static CitizenDao citizenDao() {
-        if (citizenDao == null && CitizenDaoImpl.class.isAnnotationPresent(Dao.class)) {
+    public static CitizenDao getCitizenDao() {
+        if (citizenDao == null) {
             citizenDao = new CitizenDaoImpl();
         }
         return citizenDao;
