@@ -3,7 +3,6 @@ package core.basesyntax;
 import core.basesyntax.controller.ConsoleHandler;
 import core.basesyntax.lib.Injector;
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) throws InvocationTargetException,
@@ -11,7 +10,5 @@ public class Main {
         ConsoleHandler handler = (ConsoleHandler) Injector
                 .getInstance(ConsoleHandler.class);
         handler.handleCitizen();
-        LinkedList linkedList = new LinkedList();
-
     }
 }
